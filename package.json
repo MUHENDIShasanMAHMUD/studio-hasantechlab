@@ -1,0 +1,42 @@
+{
+  "name": "techlab-engineering-hardware-sandbox",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "node --watch server/index.js",
+    "dev:client": "vite",
+    "build": "vite build",
+    "start": "node server/index.js",
+    "cleanup": "node server/cleanup.js",
+    "test": "npm run test:api && npm run test:unit",
+    "test:api": "node --test server/*.test.js",
+    "test:unit": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "latest",
+    "better-sqlite3": "latest",
+    "cors": "latest",
+    "express": "latest",
+    "express-rate-limit": "^8.7.2",
+    "helmet": "^8.3.0",
+    "lucide-vue-next": "latest",
+    "pinia": "latest",
+    "vue": "latest",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@vue/test-utils": "latest",
+    "autoprefixer": "latest",
+    "concurrently": "latest",
+    "jsdom": "latest",
+    "postcss": "latest",
+    "supertest": "latest",
+    "tailwindcss": "^3.4.17",
+    "vite": "latest",
+    "vitest": "latest"
+  }
+}

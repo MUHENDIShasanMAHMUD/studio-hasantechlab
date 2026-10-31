@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log*
+dist
+coverage
+data
+.env
+.git
+.github
+.vscode
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
