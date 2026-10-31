@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE || '/api'
+const API_BASE = (import.meta.env.VITE_API_BASE || '/api').replace(/\/+$/, '')
 
 export async function apiFetch(path, options = {}) {
   const deviceToken = localStorage.getItem('techlab_device_token')
@@ -6,8 +6,12 @@ export async function apiFetch(path, options = {}) {
     ...options,
     headers: { 'Content-Type': 'application/json', ...(deviceToken ? { 'X-Device-Token': deviceToken } : {}), ...options.headers }
   })
-  const body = await response.json().catch(() => ({}))
-  if (!response.ok) throw new Error(body.error || 'Request failed')
+  const contentType = response.headers.get('content-type') || ''
+  const body = contentType.includes('application/json') ? await response.json().catch(() => ({})) : {}
+  if (!response.ok) {
+    if (response.status === 404 && !contentType.includes('application/json')) throw new Error('API endpoint is not deployed or is not routed to Express')
+    throw new Error(body.error || `API request failed (${response.status})`)
+  }
   return body
 }
 
