@@ -14,6 +14,6 @@ Retention runs every 24 hours in the API process. For a separate scheduler, run 
 
 ## Vercel frontend with a separate Express API
 
-Vercel builds the Vue frontend, but it does not automatically run `server/index.js` as an Express server. Set the Vercel project environment variable `VITE_API_BASE` to the public API origin, for example `https://api.hasantechlab.com/api`, then redeploy the frontend. On the Express host, set `CORS_ORIGINS=https://studio.hasantechlab.com`.
+Vercel builds the Vue frontend, but it does not automatically run `server/index.js` as an Express server. Set the Vercel project environment variable `VITE_API_BASE` to `https://api.hasantechlab.com/api`, then redeploy the frontend. The frontend also has this URL as its production fallback. On the Express host, set `CORS_ORIGINS=https://studio.hasantechlab.com`.
 
 The relative `/api` fallback is valid only when a reverse proxy rewrites `/api` to Express. Do not rely on it for a static-only Vercel deployment. Keep SQLite on the persistent Docker volume; do not move this SQLite backend into a Vercel serverless function without replacing persistence with a durable database.

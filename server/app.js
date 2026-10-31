@@ -10,7 +10,7 @@ const TOOL_TYPE_PATTERN = /^[a-z][a-z0-9_]{1,31}$/
 const MAX_CONFIG_BYTES = 50_000
 
 function parseAllowedOrigins() {
-  const origins = (process.env.CORS_ORIGINS || 'http://localhost:5173,http://localhost:5174').split(',').map((origin) => origin.trim()).filter(Boolean)
+  const origins = (process.env.CORS_ORIGINS || 'https://studio.hasantechlab.com,http://localhost:5173,http://localhost:5174').split(',').map((origin) => origin.trim()).filter(Boolean)
   if (origins.includes('*')) throw new Error('CORS_ORIGINS must not contain wildcard origins')
   return origins
 }

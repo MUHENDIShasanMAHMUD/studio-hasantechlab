@@ -1,4 +1,5 @@
-const API_BASE = (import.meta.env.VITE_API_BASE || '/api').replace(/\/+$/, '')
+const DEFAULT_API_BASE = import.meta.env.PROD ? 'https://api.hasantechlab.com/api' : '/api'
+const API_BASE = (import.meta.env.VITE_API_BASE || DEFAULT_API_BASE).replace(/\/+$/, '')
 
 export async function apiFetch(path, options = {}) {
   const deviceToken = localStorage.getItem('techlab_device_token')
